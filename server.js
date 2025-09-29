@@ -11,13 +11,17 @@ mongoose.connect("mongodb+srv://atul2710rawat_db_user:Cx3ztk47lgUtd2le@cluster0.
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors(
-    {
-        origin: "https://todo-list-front-theta.vercel.app/",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true
-    }
-));
+const allowedOrigins = [
+  "https://todo-list-front-theta.vercel.app",
+  "http://localhost:3000"   // for local dev
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get("/", async (req, res)=>{
